@@ -18,6 +18,12 @@ module.exports = function (app, fs) {
         }
     });
     app.get('/home', (req, res) => {
-        res.render('home.html')
+        var sess;
+        sess = req.session;
+        if (sess.userid) {
+            res.redirect('/home')
+        } else {
+            res.render('home.html')
+        }
     })
 }
