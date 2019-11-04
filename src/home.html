@@ -15,7 +15,7 @@
     <div id="app" v-cloak>
         <h1>환영합니다 {{message}}</h1>
         <ul>
-            <li v-for="item in listData.users">{{item.name}}</li>
+            <li v-for="item in listData">{{item.name}}</li>
         </ul>
     </div>
 </body>
@@ -37,6 +37,13 @@
             list() {
                 axios.get('/api/list').then(function (response) {
                     console.log(response)
+                    console.log(Object.entries(response.data))
+                    const users = Object.entries(response.data).map(([id, rest]) => ({
+                        'id' : id,
+                        'password' : rest.password,
+                        'name' : rest.name
+                    }));
+                    console.log(users)
                     this.listData = response.data;
                 }.bind(this))
             }
