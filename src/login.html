@@ -44,7 +44,7 @@
                     userpass: this.pass,
                 }).then(function (rep) {
                     console.log(rep)
-                    if(rep.data.result == 'sucess'){
+                    if(rep.data.success == 1){
                         location.href = "/home"
                     }
                 })
