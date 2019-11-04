@@ -16,10 +16,23 @@ app.post('/api/signin', (req, res) => {
     const { username, userpass } = req.body;
     if(username == 'user' && userpass == 'pass'){
         res.json({'result': 'sucess'})
-        //res.redirect('home.html')
     }else{
         res.json({'result': 'fail'});
     }
+});
+
+app.get('/api/list', (req, res) => {
+    fs.readFile(__dirname + "/data/users.json", 'utf8', function (err, data) {
+        var users = JSON.parse(data)
+        res.json(users);
+    });
+})
+
+app.get('/api/getUser/:username', function (req, res) {
+    fs.readFile(__dirname + "/data/users.json", 'utf8', function (err, data) {
+        var users = JSON.parse(data);
+        res.json(users['users'][req.params.username]);
+    });
 });
 
 app.listen(3000, () => console.log('Server Start'));
