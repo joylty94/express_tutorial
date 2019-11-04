@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs')
-var session = require('express-session');
-var RedisStore = require('connect-redis')(session);
+const fs = require('fs');
+const session = require('express-session');
+const redis = require('redis');
+let RedisStore = require('connect-redis')(session)
+let redisClient = redis.createClient()
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,7 +18,7 @@ app.engine('html', require('ejs').renderFile);
 app.use(express.static('public'));
 
 app.use(session({
-    store: new RedisStore({}),
+    store: new RedisStore({ client: redisClient }),
     secret: '@#@$MYSIGN#@$#$',
     resave: false,
     saveUninitialized: true,
