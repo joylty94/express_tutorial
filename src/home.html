@@ -6,9 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>홈</title>
 </head>
+<style>
+    [v-cloak] { 
+        display: none;
+    } 
+</style>
 <body>
-    <div>
-        <h1>환영합니다</h1>
+    <div id="app" v-cloak>
+        <h1>환영합니다 {{message}}</h1>
+        <ul>
+            <li v-for="item in listData.users">{{item.name}}</li>
+        </ul>
     </div>
 </body>
 </html>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: '안녕하세요 Vue!',
+            listData: 'bbbbb',
+        },
+        created(){
+            this.list()
+        },
+        methods: {
+            list() {
+                axios.get('/api/list').then(function (response) {
+                    console.log(response)
+                    this.listData = response.data;
+                }.bind(this))
+            }
+        },
+    })
+</script>

@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const fs = express('fs')
-var router = require('./router/main')(app, fs);
+const fs = require('fs')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -26,3 +25,5 @@ app.post('/api/signin', (req, res) => {
 app.listen(3000, () => console.log('Server Start'));
 
 app.use(express.static('public'));
+
+var router = require('./router/main')(app, fs);
