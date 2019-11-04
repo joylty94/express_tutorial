@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const fs = require('fs')
+var session = require('express-session');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -38,5 +39,11 @@ app.get('/api/getUser/:username', function (req, res) {
 app.listen(3000, () => console.log('Server Start'));
 
 app.use(express.static('public'));
+
+app.use(session({
+    secret: '@#@$MYSIGN#@$#$',
+    resave: false,
+    saveUninitialized: true
+}));
 
 var router = require('./router/main')(app, fs);
