@@ -3,8 +3,11 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const session = require('express-session');
 const redis = require('redis');
-let RedisStore = require('connect-redis')(session)
-let redisClient = redis.createClient()
+let RedisStore = require('connect-redis')(session);
+let redisClient = redis.createClient();
+var mysql = require('mysql');
+var dbconfig = require('./config/database.js');
+var connection = mysql.createConnection(dbconfig);
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
