@@ -20,7 +20,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.post('/api/signin', (req, res) => {
+app.post('/api/login', (req, res) => {
     var sess;
     sess = req.session;
 
@@ -53,17 +53,21 @@ app.post('/api/signin', (req, res) => {
 });
 
 app.get('/api/logout', function (req, res) {
+    var sess;
     sess = req.session;
-    if (sess.username) {
+    var result = {}
+    if (sess.userid) {
         req.session.destroy(function (err) {
             if (err) {
                 console.log(err);
+                result["success"] = 0;
+                result["error"] = err;
+                res.json(result)
             } else {
-                res.redirect('/');
+                result["success"] = 1;
+                res.json(result)
             }
         })
-    } else {
-        res.redirect('/');
     }
 })
 

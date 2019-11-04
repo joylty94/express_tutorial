@@ -13,6 +13,12 @@
 </style>
 <body>
     <div id="app" v-cloak>
+        <head>
+            <ul>
+                <li><button type="button" v-on:click="logout">로그아웃</button></li>
+            </ul>
+        </head>
+        <% include ./ejs/nav.ejs %>
         <h1>환영합니다 {{message}}</h1>
         <ul>
             <li v-for="item in listData">{{item.name}}</li>
@@ -46,6 +52,16 @@
                     console.log(users)
                     this.listData = response.data;
                 }.bind(this))
+            },
+            logout(){
+                console.log('로그아웃')
+                axios.get('/api/logout').then(function (response){
+                    if(response.data.success = 1){
+                        location.href = "/"
+                    }
+                }).catch(error => {
+                    console.log(error.response);
+                })
             }
         },
     })
