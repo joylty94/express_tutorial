@@ -1,4 +1,4 @@
-module.exports = function (app, fs) {
+module.exports = function (app, fs, connection) {
     app.get('/', function (req, res) {
         var sess;
         sess = req.session;
@@ -26,4 +26,13 @@ module.exports = function (app, fs) {
             res.redirect('/')
         }
     })
+    app.get('/persons', function (req, res) {
+
+        connection.query('SELECT * from Persons', function (err, rows) {
+            if (err) throw err;
+
+            console.log('The solution is: ', rows);
+            res.send(rows);
+        });
+    });
 }

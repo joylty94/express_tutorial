@@ -10,6 +10,8 @@ var dbconfig = require('./config/database.js');
 var connection = mysql.createConnection(dbconfig);
 const app = express();
 
+app.set('port', process.env.PORT || 3000);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
@@ -92,6 +94,8 @@ app.get('/api/getUser/:username', function (req, res) {
     });
 });
 
-app.listen(3000, () => console.log('Server Start'));
+app.listen(app.get('port'), () => {
+    console.log('Express server listening on port ' + app.get('port'));
+});
 
-var router = require('./router/main')(app, fs);
+var router = require('./router/main')(app, fs, connection);
