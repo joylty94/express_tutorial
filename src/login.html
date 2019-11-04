@@ -40,7 +40,7 @@
         methods: {
             login() {
                 axios.post('/api/signin', {
-                    username: this.id,
+                    userid: this.id,
                     userpass: this.pass,
                 }).then(function (rep) {
                     console.log(rep)
