@@ -2,9 +2,9 @@
   "name": "express_tutorial",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node index"
+    "start": "node app"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,8 @@
     "express-session": "^1.17.0",
     "fs": "0.0.1-security",
     "mysql": "2.17.1",
-    "redis": "^2.8.0"
+    "mysql2": "^2.0.0",
+    "redis": "^2.8.0",
+    "sequelize": "^5.21.2"
   }
 }
