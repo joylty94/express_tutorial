@@ -100,4 +100,5 @@ app.listen(app.get('port'), () => {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
-var router = require('./router/main')(app, fs, connection);
+// var router = require('./router/main')(app, fs, connection);
+var router = require('./router/main')(app, fs);
