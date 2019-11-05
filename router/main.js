@@ -26,6 +26,9 @@ module.exports = function (app, fs) {
             res.redirect('/')
         }
     })
+    app.get('/signup', (req, res) =>{
+        res.render('signUp.html')
+    })
     // app.get('/persons', function (req, res) {
 
     //     connection.query('SELECT * from Persons', function (err, rows) {
