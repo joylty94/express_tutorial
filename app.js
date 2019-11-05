@@ -5,10 +5,12 @@ const session = require('express-session');
 const redis = require('redis');
 let RedisStore = require('connect-redis')(session);
 let redisClient = redis.createClient();
-var mysql = require('mysql');
-var dbconfig = require('./config/database.js');
-var connection = mysql.createConnection(dbconfig);
+// var mysql = require('mysql');
+// var dbconfig = require('./config/database.js');
+// var connection = mysql.createConnection(dbconfig);
+var sequelize = require('./models/index').sequelize;
 const app = express();
+sequelize.sync();
 
 app.set('port', process.env.PORT || 3000);
 
