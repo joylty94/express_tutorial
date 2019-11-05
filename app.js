@@ -96,6 +96,10 @@ app.get('/api/getUser/:username', function (req, res) {
     });
 });
 
+app.post('/api/signup', function (req, res){
+    const { userid, userpass, username } = req.body;
+})
+
 app.listen(app.get('port'), () => {
     console.log('Express server listening on port ' + app.get('port'));
 });
