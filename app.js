@@ -5,13 +5,13 @@ const session = require('express-session');
 const redis = require('redis');
 let RedisStore = require('connect-redis')(session);
 let redisClient = redis.createClient();
+const db = require('./db/index');
 // var mysql = require('mysql');
 // var dbconfig = require('./config/database.js');
 // var connection = mysql.createConnection(dbconfig);
 var sequelize = require('./models/index').sequelize;
 const app = express();
 sequelize.sync();
-
 
 // var router = require('./router/main')(app, fs, connection);
 var router = require('./router/main')(app, fs);
@@ -27,7 +27,7 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 app.use(express.static('public'));
-
+db();
 app.use(session({
     store: new RedisStore({ client: redisClient }),
     secret: '@#@$MYSIGN#@$#$',
