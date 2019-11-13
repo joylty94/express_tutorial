@@ -12,6 +12,10 @@ var sequelize = require('./models/index').sequelize;
 const app = express();
 sequelize.sync();
 
+
+// var router = require('./router/main')(app, fs, connection);
+var router = require('./router/main')(app, fs);
+
 app.set('port', process.env.PORT || 3000);
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -99,10 +103,6 @@ app.get('/api/getUser/:username', function (req, res) {
 app.post('/api/signup', function (req, res){
     const { userid, userpass, username } = req.body;
 })
-
-
-// var router = require('./router/main')(app, fs, connection);
-var router = require('./router/main')(app, fs);
 
 app.use((req, res, next) => { // 404 처리 부분
     res.status(404).send('일치하는 주소가 없습니다!');
